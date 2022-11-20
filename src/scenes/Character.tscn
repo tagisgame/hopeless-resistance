@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="src/assets/character/characterSpritesheet(test)" type="SpriteFrames" id=1]
+
+[node name="Character" type="AnimatedSprite"]
+frames = ExtResource( 1 )
+centered = false

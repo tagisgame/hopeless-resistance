@@ -11,7 +11,17 @@ config_version=4
 [application]
 
 config/name="Hopeless Resistance"
+run/main_scene="res://src/scenes/2dMain.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+BlockData="*res://src/scripts/BlockData.gd"
+
+[display]
+
+window/size/width=1280
+window/size/height=720
 
 [editor]
 

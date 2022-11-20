@@ -1,0 +1,6 @@
+[gd_scene format=2]
+
+[node name="TrackBlock" type="KinematicBody2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+centered = false
