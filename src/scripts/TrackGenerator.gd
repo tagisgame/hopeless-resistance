@@ -25,9 +25,9 @@ var track_blocks_arr = []
 
 		
 func _process(delta):
-	print(gamespeed)
+	#print(gamespeed)
 	if track_blocks_arr[track_blocks_arr.size() - 1].position.x < -1280:
-		print("track block removing...")
+		#print("track block removing...")
 		track_blocks_arr.pop_back()
 		
 		var new_x = track_blocks_arr[0].position.x + 427
@@ -56,7 +56,7 @@ func setup(st_gamespeed, gamespeed_inc):
 	
 # Function generating track block
 func generate_track_block(x = 0):
-	print("track block generating...")
+	#print("track block generating...")
 	var next_block_data
 	var next_block = track_block_scene.instance()
 	
@@ -81,7 +81,7 @@ func generate_track_block(x = 0):
 	return next_block
 	
 func update_speed(delta):
-	print("updating speed with increment of:" + str(gamespeed_increment))
-	print("old speed:" + str(gamespeed))
+	#print("updating speed with increment of:" + str(gamespeed_increment))
+	#print("old speed:" + str(gamespeed))
 	gamespeed += gamespeed_increment * delta
-	print("new speed:" + str(gamespeed))
+	#print("new speed:" + str(gamespeed))

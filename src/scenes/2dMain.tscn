@@ -1,7 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/scripts/2dMain.gd" type="Script" id=1]
 [ext_resource path="res://src/scenes/Track.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/assets/character/Character.png" type="Texture" id=3]
+[ext_resource path="res://src/scripts/Movement.gd" type="Script" id=4]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 96, 122 )
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 42.0
+height = 158.0
 
 [node name="2dMain" type="Node2D"]
 script = ExtResource( 1 )
@@ -11,5 +20,24 @@ gamespeed_increment = 4.0
 [node name="Track" parent="." instance=ExtResource( 2 )]
 obstacles_frequency = 2
 track_block_width = 427
+
+[node name="Player" type="KinematicBody2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="TriggerAreaTest" type="Area2D" parent="Player"]
+position = Vector2( 418, 447 )
+
+[node name="TriggerAreaHitboxTest" type="CollisionShape2D" parent="Player/TriggerAreaTest"]
+position = Vector2( 10, 5 )
+shape = SubResource( 2 )
+
+[node name="Character" type="Sprite" parent="Player"]
+position = Vector2( 120, 325 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="StandingShape" type="CollisionShape2D" parent="Player"]
+position = Vector2( 296, 458 )
+shape = SubResource( 1 )
 
 [connection signal="ready" from="Track" to="." method="_on_Track_ready"]
