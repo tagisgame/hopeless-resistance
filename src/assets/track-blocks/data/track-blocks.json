@@ -1,47 +1,143 @@
 {
-    "track_blocks_types": [
-        {
-            "type_name": "full_walls_outdoor",
-            "ids": ["w_full1", "w_full2"],
-            "env": "outdoor",
-            "connects_to_types": ["full_walls_outdoor, full_walls_end_outdoor, half_walls_start_outdoor, obstacle_walls_outdoor"],
-            "not_connect_to_ids": [],
-            "obstacle_type": "none",
-            "obstacle_hitboxes": []
-        },
-        {
-            "type_name": "half_walls_start_outdoor",
-            "ids": ["w_half_s1", "w_half_s2"],
-            "env": "outdoor",
-            "connects_to_types": ["half_walls_end_outdoor"],
-            "not_connect_to_ids": [],
-            "obstacle_type": "hole",
-            "obstacle_hitboxes": [
-                {
-                    "type": "hole_hitbox",
-                    "x1": 45,
-                    "y1": 526,
-                    "x2": 427,
-                    "y2": 760
-                }
-            ]
-        },
-        {
-            "type_name": "half_walls_end_outdoor",
-            "ids": ["w_half_e1"],
-            "env": "outdoor",
-            "connects_to_types": ["full_walls_outdoor, full_walls_end_outdoor, obstacle_walls_outdoor"],
-            "not_connect_to_ids": [],
-            "obstacle_type": "hole",
-            "obstacle_hitboxes": [
-                {
-                    "type": "hole_hitbox",
-                    "x1": 0,
-                    "y1": 526,
-                    "x2": 379,
-                    "y2": 760
-                }
-            ]
-        }
-    ]
+	"track_block_types":{
+		"outdoor":{
+			"full_walls":{
+				"ids": ["full_G_1"],
+				"transition_to": "outdoor",
+				"obstacle_type": "none",
+				"obstacle_hitboxes":{},
+				"width": [345, 690, 1035, 1380, 1725, 2070]	
+			},
+			"half_walls":{
+				"ids": ["half_G_1"],
+				"transition_to": "outdoor",
+				"obstacle_type": "hole",
+				"obstacle_hitboxes":{
+					"hitbox":{
+						"x1": 0,
+						"x2": 0,
+						"y1": 0,
+						"y2": 0
+					}
+				},
+				"width": [345]
+			},
+			"hurdle_walls":{
+				"ids": ["full_G_1"],
+				"transition_to": "outdoor",
+				"obstacle_type": "hurdle",
+				"obstacle_hitboxes":{
+					"hitbox":{
+						"x1": 0,
+						"x2": 0,
+						"y1": 0,
+						"y2": 0
+					},
+					"trigger":{
+						"x1": 0,
+						"x2": 0,
+						"y1": 0,
+						"y2": 0
+					}
+				},
+				"width": [345]
+			},
+			"door_walls":{
+				"ids": ["full_G_1"],
+				"transition_to": "indoor",
+				"obstacle_type": "door",
+				"obstacle_hitboxes":{
+					"hitbox":{
+						"x1": 0,
+						"x2": 0,
+						"y1": 0,
+						"y2": 0
+					},
+					"trigger":{
+						"x1": 0,
+						"x2": 0,
+						"y1": 0,
+						"y2": 0
+					}
+				},
+				"width": [345]
+			}
+		},
+		"indoor":{
+			"full_walls":{
+				"ids": ["full_G_1"],
+				"transition_to": "outdoor",
+				"obstacle_type": "none",
+				"obstacle_hitboxes":{},
+				"width": [345]
+			},
+			"half_walls":{
+				"ids": ["full_G_1"],
+				"transition_to": "indoor",
+				"obstacle_type": "hole",
+				"obstacle_hitboxes":{
+					"hitbox":{
+						"x1": 0,
+						"x2": 0,
+						"y1": 0,
+						"y2": 0
+					},
+					"trigger":{
+						"x1": 0,
+						"x2": 0,
+						"y1": 0,
+						"y2": 0
+					}
+				},
+				"width": [345]
+			},
+			"hurdle_walls":{
+				"ids": ["full_G_1"],
+				"transition_to": "indoor",
+				"obstacle_type": "hurdle",
+				"obstacle_hitboxes":{
+					"hitbox":{
+						"x1": 0,
+						"x2": 0,
+						"y1": 0,
+						"y2": 0
+					},
+					"trigger":{
+						"x1": 0,
+						"x2": 0,
+						"y1": 0,
+						"y2": 0
+					}
+				},
+				"width": [345]
+			},
+			"door_walls":{
+				"ids": ["full_G_1"],
+				"transition_to": "outdoor",
+				"obstacle_type": "door",
+				"obstacle_hitboxes":{
+					"hitbox":{
+						"x1": 0,
+						"x2": 0,
+						"y1": 0,
+						"y2": 0
+					},
+					"trigger":{
+						"x1": 0,
+						"x2": 0,
+						"y1": 0,
+						"y2": 0
+					}
+				},
+				"width": [345]
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	
+
 }
