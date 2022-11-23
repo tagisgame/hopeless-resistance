@@ -2,10 +2,6 @@ extends Node
 
 var track_block_scene = preload("res://src/scenes/TrackBlock.tscn")
 
-# Global variables for the track generation
-var gamespeed
-var gamespeed_increment
-var gamespeed_cap
 # WARNING: NEVER PUT THOSE AT ZERO -> INFINITE LOOP
 export var obstacles_frequency : int # how many tiles between the obstacles
 export var max_halfwalls_in_a_row : int # max number of shorter wall in a row 
@@ -27,7 +23,7 @@ var track_block_data # data of all track block
 var track_blocks_arr = [] # array of track_blocks present in a moment
 
 
-func _process(delta):
+func process_blocks(gamespeed, delta):
 	# delete block's reference and node if it's 3000 pixels behind the screen
 	if track_blocks_arr[track_blocks_arr.size() - 1].position.x < -3000:
 		remove_child(track_blocks_arr[track_blocks_arr.size() - 1])
@@ -36,22 +32,16 @@ func _process(delta):
 	# if last block is closer than 2000 px to the front of the screen, generate new block
 	if track_blocks_arr[0].position.x < 2000:
 		var last_block_data = track_blocks_arr[0].block_data
-		var new_x = track_blocks_arr[0].position.x + track_blocks_arr[0].width
+		var new_x = track_blocks_arr[0].position.x + track_block_width
 		track_blocks_arr.push_front(generate_track_block(last_block_data, new_x))
 		add_child(track_blocks_arr[0])
 	
 	# update position of all blocks by gamespeed
 	for el in track_blocks_arr:
 		el.move_and_slide(Vector2((gamespeed * -1), 0))
-		update_speed(delta)
 
 # Setup of the generator
-func setup(st_gamespeed, gamespeed_inc, gamespeed_c):
-	# setup the gamespeed variables
-	gamespeed = st_gamespeed
-	gamespeed_increment = gamespeed_inc
-	gamespeed_cap = gamespeed_c
-	
+func _ready():
 	# get initial values
 	next_obstacle = obstacles_frequency
 	track_block_data = BlockData.track_blocks_data
@@ -59,10 +49,10 @@ func setup(st_gamespeed, gamespeed_inc, gamespeed_c):
 	
 	#generate first 6 blocks of track to kickstart the game
 	for i in 6:
-		var new_x = 0
+		var new_x = -track_block_width * 2
 		if i > 0:
 			last_block_data = track_blocks_arr[0].block_data
-			new_x = track_blocks_arr[0].position.x + track_blocks_arr[0].width
+			new_x = track_blocks_arr[0].position.x + track_block_width
 		track_blocks_arr.push_front(generate_track_block(last_block_data, new_x))
 		add_child(track_blocks_arr[0])
 	
@@ -114,7 +104,3 @@ func generate_track_block(last_block_data, x = 0):
 	next_block.set_block_data(next_block_data)
 	next_block.position.x = x - 1
 	return next_block
-	
-func update_speed(delta):
-	if gamespeed < gamespeed_cap:
-		gamespeed += gamespeed_increment * delta
