@@ -22,7 +22,6 @@ var track_block_data # data of all track block
 
 var track_blocks_arr = [] # array of track_blocks present in a moment
 
-
 func process_blocks(gamespeed, delta):
 	# delete block's reference and node if it's 3000 pixels behind the screen
 	if track_blocks_arr[track_blocks_arr.size() - 1].position.x < -3000:
