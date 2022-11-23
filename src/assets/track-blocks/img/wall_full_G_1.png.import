@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tb-HoleWall(test).png-6b14fffe4b025fecca7d15efe49e341b.stex"
+path="res://.import/wall_full_G_1.png-0e11ecc1071338db09b51a6367f38f6f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/assets/track-blocks/img/tb-HoleWall(test).png"
-dest_files=[ "res://.import/tb-HoleWall(test).png-6b14fffe4b025fecca7d15efe49e341b.stex" ]
+source_file="res://src/assets/track-blocks/img/wall_full_G_1.png"
+dest_files=[ "res://.import/wall_full_G_1.png-0e11ecc1071338db09b51a6367f38f6f.stex" ]
 
 [params]
 

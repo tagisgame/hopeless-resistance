@@ -23,12 +23,16 @@ height = 158.0
 
 [node name="2dMain" type="Node2D"]
 script = ExtResource( 1 )
-starting_gamespeed = 2.0
-gamespeed_increment = 4.0
+starting_gamespeed = 100.0
+gamespeed_increment = 10.0
+gamespeed_cap = 800.0
 
 [node name="Track" parent="." instance=ExtResource( 2 )]
-obstacles_frequency = 2
-track_block_width = 427
+obstacles_frequency = 5
+max_halfwalls_in_a_row = 1
+max_hurdles_in_a_row = 1
+max_barricades_in_a_row = 1
+track_block_width = 345
 
 [node name="TriggerJump" type="Area2D" parent="."]
 position = Vector2( 450, 454 )
