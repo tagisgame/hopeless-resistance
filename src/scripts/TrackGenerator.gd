@@ -102,4 +102,7 @@ func generate_track_block(last_block_data, x = 0):
 	print("\n")"""
 	next_block.set_block_data(next_block_data)
 	next_block.position.x = x - 1
+	
+	next_block.connect("ScoreArea_body_entered", get_parent(), "_on_ScoreArea_body_entered")
+	
 	return next_block

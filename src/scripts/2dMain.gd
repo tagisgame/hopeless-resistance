@@ -5,6 +5,10 @@ export var starting_gamespeed : float # gamespeed at the beginning of the game
 export var gamespeed_increment : float # how faster should game gets each frame/block (tbd...)
 export var gamespeed_cap : float # maximum speed of the game
 
+# score system
+var score = 0
+signal scoreChanged(value)
+
 var gamespeed
 
 
@@ -28,3 +32,6 @@ func update_speed(delta):
 func _on_Track_ready():
 	track_scene = get_node("Track")
 	
+func _on_ScoreArea_body_entered(body):
+	score += 1
+	emit_signal("scoreChanged", score)

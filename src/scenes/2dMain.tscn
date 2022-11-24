@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/scripts/2dMain.gd" type="Script" id=1]
 [ext_resource path="res://src/scenes/Track.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://src/scenes/TriggerJump.gd" type="Script" id=5]
 [ext_resource path="res://src/scenes/TriggerCrouch.gd" type="Script" id=6]
 [ext_resource path="res://src/scenes/TriggerMash.gd" type="Script" id=7]
+[ext_resource path="res://src/scenes/Control.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/scenes/UI.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 3.5, 10 )
@@ -72,6 +74,10 @@ centered = false
 position = Vector2( 200, 450 )
 shape = SubResource( 1 )
 
+[node name="Control" parent="." instance=ExtResource( 8 )]
+script = ExtResource( 9 )
+
+[connection signal="scoreChanged" from="." to="Control" method="_on_2dMain_scoreChanged"]
 [connection signal="ready" from="Track" to="." method="_on_Track_ready"]
 [connection signal="body_entered" from="TriggerJump" to="TriggerJump" method="_on_TriggerJump_body_entered"]
 [connection signal="body_exited" from="TriggerJump" to="TriggerJump" method="_on_TriggerJump_body_exited"]
