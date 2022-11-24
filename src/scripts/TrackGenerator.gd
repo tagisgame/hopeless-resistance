@@ -102,4 +102,11 @@ func generate_track_block(last_block_data, x = 0):
 	print("\n")"""
 	next_block.set_block_data(next_block_data)
 	next_block.position.x = x - 1
+	
+	next_block.connect("HitboxArea_body_entered", get_node("../Player"), "_on_HitboxArea_body_entered")
+	next_block.connect("TriggerArea_body_entered", get_node("../Player"), "_on_TriggerArea_body_entered")
+	next_block.connect("HitboxArea_body_exited", get_node("../Player"), "_on_HitboxArea_body_exited")
+	next_block.connect("TriggerArea_body_exited", get_node("../Player"), "_on_TriggerArea_body_exited")
+	
 	return next_block
+	
