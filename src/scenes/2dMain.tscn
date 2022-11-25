@@ -1,10 +1,12 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/scripts/2dMain.gd" type="Script" id=1]
 [ext_resource path="res://src/scenes/Track.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/assets/character/character_movement_spritesheet.png" type="Texture" id=3]
 [ext_resource path="res://src/scripts/Movement.gd" type="Script" id=4]
 [ext_resource path="res://src/scenes/Background.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/assets/snd/Music_1.mp3" type="AudioStream" id=6]
+[ext_resource path="res://src/assets/snd/Music_2.mp3" type="AudioStream" id=7]
 [ext_resource path="res://src/scenes/Control.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/scenes/UI.gd" type="Script" id=9]
 
@@ -155,9 +157,20 @@ script = ExtResource( 9 )
 z_index = -4
 bg_block_width = 1438.0
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -21.048
+autoplay = true
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -21.048
+
 [connection signal="scoreChanged" from="." to="Control" method="_on_2dMain_scoreChanged"]
 [connection signal="ready" from="Track" to="." method="_on_Track_ready"]
 [connection signal="Character_Died" from="Player" to="." method="_on_Player_Character_Died"]
 [connection signal="broke" from="Player" to="Control" method="_on_Player_broke"]
 [connection signal="jumped" from="Player" to="Control" method="_on_Player_jumped"]
 [connection signal="mash" from="Player" to="Control" method="_on_Player_mash"]
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]
+[connection signal="finished" from="AudioStreamPlayer2" to="." method="_on_AudioStreamPlayer_finished"]

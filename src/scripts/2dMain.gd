@@ -32,6 +32,8 @@ func _process(delta):
 	pass
 	
 	
+	
+	
 func update_speed(delta):
 	if gamespeed < gamespeed_cap:
 		gamespeed += gamespeed_increment * delta
@@ -44,3 +46,7 @@ func _on_ScoreArea_body_entered(body):
 func _on_Player_Character_Died():
 	get_tree().reload_current_scene()
 	get_tree().change_scene("res://src/scenes/GameOverScreen.tscn")
+
+
+func _on_AudioStreamPlayer_finished():
+	$AudioStreamPlayer2.play()
