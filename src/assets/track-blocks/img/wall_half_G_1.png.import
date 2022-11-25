@@ -14,7 +14,7 @@ dest_files=[ "res://.import/wall_half_G_1.png-1246821e350be78883cbb4fd5f33d5b0.s
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
