@@ -25,13 +25,9 @@ func set_block_data(b_data):
 	block_obstacle = b_data.get("obstacle_type")
 	
 	# set texture for block
-	var image_texture = ImageTexture.new()
-	var image = Image.new()
 	var image_path = "res://src/assets/track-blocks/img/" + b_data.get("ids")[randi() % b_data.get("ids").size()] + ".png"
-	image.load(image_path)
-	image_texture.create_from_image(image)
 	
-	get_node("Sprite").texture = image_texture
+	get_node("Sprite").texture = load(image_path)
 	
 	# generation of hitboxes
 	if block_obstacle != "none" and block_data.get("obstacle_hitboxes").has("hitbox"):
