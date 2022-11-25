@@ -1,66 +1,98 @@
 extends KinematicBody2D
 
-onready var character = get_node("Character") #adds character var connected to in-game character
-onready var hitbox = get_node("StandingShape") #adds character hitbox var
+#adds character var connected to in-game character
+onready var character = get_node("Character") 
+#adds character hitbox var
+onready var hitbox = get_node("Hitbox") 
 
-onready var jump = get_node("../TriggerJump")
-onready var crouch = get_node("../TriggerCrouch")
-onready var mash = get_node("../TriggerMash")
+#vars :D
+var jump_event = false
+var crouch_event = true
+var mash_event = false
+var is_crouching = false
+var is_jumping = false
+var req_met = false
+var mash_count = 0
+export var mash_succes = 3
 
-var doormash = 0
+signal demise
 
+#player enters trigger (here starts QTE)
+func _on_TriggerArea_body_entered(body, trigger_type):
+	
+	is_crouching = false
+	
+	if trigger_type == "hurdle":
+		jump_event = true
+		crouch_event = false
+		mash_event = false
+	elif trigger_type == "door":
+		jump_event = false
+		crouch_event = false
+		mash_event = true
+		mash_count = 0
+		
+#player leaves trigger (only to allow him to crouch outside obstacles)
+func _on_TriggerArea_body_exited(body, trigger_type):
+	jump_event = false
+	crouch_event = true
+	mash_event = false
+
+			
+#player enters hitbox (kill area)
+func _on_HitboxArea_body_entered(body, obstacle_type): 
+	if req_met:
+		if obstacle_type == "hurdle":
+			jump_over()
+		else:
+			break_barricade()
+	else:
+		die()
+		print("ded")
+	
+	req_met = false
+	
+	
+	
 func _physics_process(_delta):
 	
-	if Input.is_action_just_pressed("ui_accept") and jump.jump == 1: #checks 2 conditions: pressed spacebar and if var jump in TriggerJump is = 1 
-		character.position.y -= 100 #if yes jump lmao
-		hitbox.position.y -= 100
-	
-	if Input.is_action_just_released("ui_accept") and jump.jump == 1: #
-		character.position.y += 100
-		hitbox.position.y += 100
+	#crouch mechanic
+	if Input.is_action_just_pressed("ui_accept") and crouch_event == true:
+		is_crouching = true
+
+	if Input.is_action_just_released("ui_accept") and crouch_event == true:
+		is_crouching = false
 		
-	if Input.is_action_just_pressed("ui_accept") and crouch.crouch == 1: #checks 2 conditions: pressed spacebar and if var crouch in TriggerJump is = 1 
-		character.position.y += 100 #if yes jump lmao
-		hitbox.position.y += 100
-	
-	if Input.is_action_just_released("ui_accept") and crouch.crouch == 1: #
-		character.position.y -= 100
-		hitbox.position.y -= 100
+	if is_crouching:
+		hitbox.position.y = 638
+	else: 
+		hitbox.position.y = 538
+					
+					
+	#jump mechanic
+	if Input.is_action_just_pressed("ui_accept") and jump_event == true:
+		req_met = true
 		
-		
-	if Input.is_action_just_pressed("ui_accept") and mash.mash == 1:
-		if doormash >= 100:
-			character.position.x += 150
-			hitbox.position.x += 150
+	#mash mechanic
+	if Input.is_action_just_pressed("ui_accept") and mash_event == true:
+		if not mash_count >= mash_succes - 1:
+			mash_count += 1
 		else:
-			doormash = doormash + rand_range(5, 10) 
-			print(doormash)
-			
-	if Input.is_action_just_released("ui_accept") and mash.mash == 0:
-		doormash = 0
-
-
-
-		
-	if Input.is_action_just_pressed("ui_left"): #temp - just to check in hitbox area
-		character.position.x = 270
-		hitbox.position.x = 350
-		
-	if Input.is_action_just_pressed("ui_up"): #temp - just to check in hitbox area
-		character.position.x = 420
-		hitbox.position.x = 500
-		
-	if Input.is_action_just_pressed("ui_right"): #temp - just to check in hitbox area
-		character.position.x = 570
-		hitbox.position.x = 650
-		
-	if Input.is_action_just_pressed("ui_down"): #temp - just to check in hitbox area
-		character.position.x = 120
-		hitbox.position.x = 200
-		
-#It ain't perfect and it ain't much, better than my first verion where I used global.position (wtf)
-#Please don't scream It's 2AM I just wanna sleep
-#At least now I know how to make this
-
-
-
+			print("kuba <3")
+			req_met = true
+	
+	
+#play jump anime
+func jump_over():
+	print("skoczek")
+	pass
+	
+#play breaking bad anime
+func break_barricade():
+	print("broken :c")
+	pass
+	
+#play deading anime
+func die():
+	print("dead ass")
+	pass
