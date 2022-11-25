@@ -12,16 +12,23 @@ signal scoreChanged(value)
 var gamespeed
 
 
-var track_scene
+
+onready var track_scene = get_node("Track")
+onready var bg_scene = get_node("Background")
+onready var obs_frequency = track_scene.obstacles_frequency
 
 func _ready():
 	gamespeed = starting_gamespeed
 
 func _process(delta):
-	if track_scene:
-		track_scene.process_blocks(gamespeed, delta)
+	track_scene.process_blocks(gamespeed, delta)
+	bg_scene.process_blocks(gamespeed, delta)
 		
 	update_speed(delta)
+	
+	if obs_frequency >= 2:
+		obs_frequency -= 0.03 * delta
+	track_scene.obstacles_frequency = ceil(obs_frequency)
 	pass
 	
 	
@@ -29,9 +36,11 @@ func update_speed(delta):
 	if gamespeed < gamespeed_cap:
 		gamespeed += gamespeed_increment * delta
 
-func _on_Track_ready():
-	track_scene = get_node("Track")
-	
 func _on_ScoreArea_body_entered(body):
 	score += 1
 	emit_signal("scoreChanged", score)
+
+
+func _on_Player_Character_Died():
+	get_tree().reload_current_scene()
+	get_tree().change_scene("res://src/scenes/GameOverScreen.tscn")

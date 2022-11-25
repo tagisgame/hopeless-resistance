@@ -1,5 +1,8 @@
 extends KinematicBody2D
 
+#character died signal
+signal Character_Died()
+
 #adds character var connected to in-game character
 onready var character = get_node("Character") 
 #adds character hitbox var
@@ -16,10 +19,16 @@ var req_met = false
 var mash_count = 0
 export var mash_succes = 3
 
+
+signal jumped()
+signal broke()
+signal mash()
+
 #idk how to do what I want without using vars shown bellow
 var jump_func = false
 var break_func = false
 var crouch_func = false
+
 
 #player enters trigger (here starts QTE)
 func _on_TriggerArea_body_entered(_body, trigger_type):
@@ -76,14 +85,17 @@ func _physics_process(_delta):
 					
 					
 	#jump mechanic
-	if Input.is_action_just_pressed("ui_accept") and jump_event == true:
+	if Input.is_action_just_pressed("ui_accept") and jump_event == true and not req_met:
 		req_met = true
+		emit_signal("jumped")
 		
 	#mash mechanic
-	if Input.is_action_just_pressed("ui_accept") and mash_event == true:
+	if Input.is_action_just_pressed("ui_accept") and mash_event == true and not req_met:
 		if not mash_count >= mash_succes - 1:
 			mash_count += 1
+			emit_signal("mash")
 		else:
+			emit_signal("broke")
 			req_met = true
 
 
@@ -107,7 +119,7 @@ func break_barricade():
 	$AnimationPlayer.play("Breaking")
 	yield($AnimationPlayer, "animation_finished")
 	_ready()
-	print("broken :c")
+
 	
 func crouch():
 	is_crouching = true
@@ -122,4 +134,4 @@ func stop_crouch():
 	_ready()
 #play deading anime
 func die():
-	print("dead")
+	emit_signal("Character_Died")

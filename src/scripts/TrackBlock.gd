@@ -51,11 +51,18 @@ func set_block_data(b_data):
 			trigger_center = trigger_pos1 + 0.5 * trigger_size
 			
 			trigger_shape.extents = trigger_size * 0.5
-			print(trigger_data)
-			print("OBSTACLE: ", block_obstacle, " HITBOX: \npos_center:", hitbox_center, "\npos1: ", hitbox_pos1, "\npos2: ", hitbox_pos2, "\nextents: ", hitbox_shape.extents)
-			print("OBSTACLE: ", block_obstacle, " TRIGGER: \npos_center:", trigger_center, "\npos1: ", trigger_pos1, "\npos2: ", trigger_pos1, "\nextents: ", trigger_shape.extents)
 		
-		
+		if block_obstacle == "hurdle":
+			var obstacle_sprite = Sprite.new()
+			var obstacle_texture_path = "src/assets/hurdles/hurdle_" + str(randi() % 1) + ".png"
+			obstacle_sprite.texture = load(obstacle_texture_path)
+			obstacle_sprite.centered = false
+			obstacle_sprite.position = hitbox_pos1
+			obstacle_sprite.position.y += 100
+			add_child(obstacle_sprite)
+		if block_obstacle == "door":
+			var door_sprite = get_node("AnimatedSprite")
+			door_sprite.visible = true
 		
 		# setting up correct collision boxes
 		hitbox_node = get_node("HitboxArea/Hitbox")
@@ -66,6 +73,9 @@ func set_block_data(b_data):
 		trigger_node.shape = trigger_shape
 		trigger_node.position = trigger_center
 
+func _on_Barricade_Break():
+	var door_sprite = get_node("AnimatedSprite")
+	door_sprite.playing = true
 
 func _on_HitboxArea_body_entered(body):
 	emit_signal("HitboxArea_body_entered", body, block_obstacle)
