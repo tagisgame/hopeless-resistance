@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/scripts/2dMain.gd" type="Script" id=1]
 [ext_resource path="res://src/scenes/Track.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/assets/character/Character.png" type="Texture" id=3]
+[ext_resource path="res://src/assets/character/character_movement_spritesheet.png" type="Texture" id=3]
 [ext_resource path="res://src/scripts/Movement.gd" type="Script" id=4]
 [ext_resource path="res://src/scenes/Control.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/scenes/UI.gd" type="Script" id=9]
@@ -10,6 +10,104 @@
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 42.0
 height = 158.0
+
+[sub_resource type="Animation" id=7]
+resource_name = "Breaking"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 72, 73, 74, 75, 75 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Crouching"
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 32, 34 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Crouching_Start"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 24, 25, 26, 27 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Crouching_Stop"
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.201, 0.401, 0.601 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 40, 41, 42, 43 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Jumping"
+length = 2.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.001, 0.201, 0.401, 0.601, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 48, 49, 50, 51, 56, 57, 56, 57, 64, 65, 66, 67 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Running"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
 
 [node name="2dMain" type="Node2D"]
 script = ExtResource( 1 )
@@ -31,10 +129,21 @@ script = ExtResource( 4 )
 position = Vector2( 77, 413 )
 texture = ExtResource( 3 )
 centered = false
+hframes = 8
+vframes = 11
+frame = 27
 
 [node name="Hitbox" type="CollisionShape2D" parent="Player"]
 position = Vector2( 157, 538 )
 shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+anims/Breaking = SubResource( 7 )
+anims/Crouching = SubResource( 4 )
+anims/Crouching_Start = SubResource( 3 )
+anims/Crouching_Stop = SubResource( 5 )
+anims/Jumping = SubResource( 6 )
+anims/Running = SubResource( 2 )
 
 [node name="Control" parent="." instance=ExtResource( 8 )]
 script = ExtResource( 9 )
