@@ -1,9 +1,24 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/scripts/2dMain.gd" type="Script" id=1]
 [ext_resource path="res://src/scenes/Track.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/assets/character/Character.png" type="Texture" id=3]
 [ext_resource path="res://src/scripts/Movement.gd" type="Script" id=4]
+[ext_resource path="res://src/scenes/TriggerJump.gd" type="Script" id=5]
+[ext_resource path="res://src/scenes/TriggerCrouch.gd" type="Script" id=6]
+[ext_resource path="res://src/scenes/TriggerMash.gd" type="Script" id=7]
+[ext_resource path="res://src/scenes/Control.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/scenes/UI.gd" type="Script" id=9]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 3.5, 10 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 55, 149 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 62.5, 151.5 )
+
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 42.0
@@ -34,4 +49,8 @@ centered = false
 position = Vector2( 157, 538 )
 shape = SubResource( 1 )
 
+[node name="Control" parent="." instance=ExtResource( 8 )]
+script = ExtResource( 9 )
+
+[connection signal="scoreChanged" from="." to="Control" method="_on_2dMain_scoreChanged"]
 [connection signal="ready" from="Track" to="." method="_on_Track_ready"]

@@ -4,6 +4,7 @@ signal HitboxArea_body_entered(body, block_obstacle)
 signal HitboxArea_body_exited(body, block_obstacle)
 signal TriggerArea_body_entered(body, block_obstacle)
 signal TriggerArea_body_exited(body, block_obstacle)
+signal ScoreArea_body_entered(body)
 
 var block_data # Dictionary with all data for each block from JSON
 var block_obstacle # var containing obstacle type
@@ -84,3 +85,7 @@ func _on_TriggerArea_body_entered(body):
 
 func _on_TriggerArea_body_exited(body):
 	emit_signal("TriggerArea_body_exited", body, block_obstacle)
+
+
+func _on_ScoreArea_body_entered(body):
+	emit_signal("ScoreArea_body_entered", body)
