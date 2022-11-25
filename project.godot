@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="Hopeless Resistance"
-run/main_scene="res://src/scenes/2dMain.tscn"
+run/main_scene="res://src/scenes/TitleScreen.tscn"
 config/icon="res://icon.png"
 
 [autoload]

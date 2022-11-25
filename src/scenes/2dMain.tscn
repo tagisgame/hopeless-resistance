@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/scripts/2dMain.gd" type="Script" id=1]
 [ext_resource path="res://src/scenes/Track.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/assets/character/Character.png" type="Texture" id=3]
 [ext_resource path="res://src/scripts/Movement.gd" type="Script" id=4]
+[ext_resource path="res://src/scenes/Background.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/scenes/Control.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/scenes/UI.gd" type="Script" id=9]
 
@@ -18,6 +19,7 @@ gamespeed_increment = 10.0
 gamespeed_cap = 800.0
 
 [node name="Track" parent="." instance=ExtResource( 2 )]
+z_index = -2
 obstacles_frequency = 5
 max_halfwalls_in_a_row = 1
 max_hurdles_in_a_row = 1
@@ -26,6 +28,7 @@ track_block_width = 345
 
 [node name="Player" type="KinematicBody2D" parent="."]
 script = ExtResource( 4 )
+mash_succes = 4
 
 [node name="Character" type="Sprite" parent="Player"]
 position = Vector2( 77, 413 )
@@ -39,5 +42,13 @@ shape = SubResource( 1 )
 [node name="Control" parent="." instance=ExtResource( 8 )]
 script = ExtResource( 9 )
 
+[node name="Background" parent="." instance=ExtResource( 5 )]
+z_index = -4
+bg_block_width = 1438.0
+
 [connection signal="scoreChanged" from="." to="Control" method="_on_2dMain_scoreChanged"]
 [connection signal="ready" from="Track" to="." method="_on_Track_ready"]
+[connection signal="Character_Died" from="Player" to="." method="_on_Player_Character_Died"]
+[connection signal="broke" from="Player" to="Control" method="_on_Player_broke"]
+[connection signal="jumped" from="Player" to="Control" method="_on_Player_jumped"]
+[connection signal="mash" from="Player" to="Control" method="_on_Player_mash"]
