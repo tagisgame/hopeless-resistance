@@ -76,7 +76,7 @@ func set_block_data(b_data):
 func _on_Barricade_Break():
 	var door_sprite = get_node("AnimatedSprite")
 	door_sprite.playing = true
-
+	
 func _on_HitboxArea_body_entered(body):
 	emit_signal("HitboxArea_body_entered", body, block_obstacle)
 

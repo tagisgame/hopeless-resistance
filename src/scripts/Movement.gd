@@ -20,7 +20,7 @@ var mash_count = 0
 export var mash_succes = 3
 var obstacle 
 
-
+signal play_break()
 signal jumped()
 signal broke()
 signal mash()
@@ -61,12 +61,19 @@ func _on_HitboxArea_body_entered(_body, obstacle_type):
 	if req_met:
 		if obstacle_type == "hurdle":
 			jump_over()
+		elif obstacle_type == "door":
+			break_barricade()
 	else:
 		die()
 		
 	req_met = false
 	
-	
+func _on_HitboxArea_body_exited(_body, obstacle_type):
+	if obstacle_type == "hurdle":
+		$AnimationPlayer.stop()
+		$AnimationPlayer.play("Jumping_stop")
+		yield($AnimationPlayer, "animation_finished")
+		_ready()
 	
 func _physics_process(_delta):
 	
@@ -96,7 +103,6 @@ func _physics_process(_delta):
 			emit_signal("mash")
 		else:
 			emit_signal("broke")
-			break_barricade()
 			req_met = true
 
 
@@ -110,15 +116,17 @@ func _ready():
 #play jump anime
 func jump_over():
 	$AnimationPlayer.stop()
-	$AnimationPlayer.play("Jumping")
+	$AnimationPlayer.play("Jumping_start")
 	yield($AnimationPlayer, "animation_finished")
-	_ready()
+	$AnimationPlayer.play("Slide")
+
 	
 #play breaking bad anime
 func break_barricade():
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("Breaking")
 	yield($AnimationPlayer, "animation_finished")
+	emit_signal("play_break")
 	_ready()
 
 	
@@ -136,6 +144,8 @@ func stop_crouch():
 	is_crouching = false
 #play deading anime
 func die():
+	get_node("../").gamespeed = 0
+	
 	if obstacle == "hole":
 		$AnimationPlayer.play("Hole_Death")
 		yield($AnimationPlayer, "animation_finished")

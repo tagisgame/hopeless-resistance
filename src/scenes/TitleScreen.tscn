@@ -44,5 +44,6 @@ text = "Hopeless resistance"
 position = Vector2( 615, 449 )
 frames = SubResource( 5 )
 animation = "press"
+frame = 1
 speed_scale = 0.3
 playing = true
