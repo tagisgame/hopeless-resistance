@@ -18,8 +18,9 @@ var is_running = true
 var req_met = false
 var mash_count = 0
 export var mash_succes = 3
+var obstacle 
 
-
+signal play_break()
 signal jumped()
 signal broke()
 signal mash()
@@ -56,17 +57,23 @@ func _on_TriggerArea_body_exited(_body, _trigger_type):
 			
 #player enters hitbox (kill area)
 func _on_HitboxArea_body_entered(_body, obstacle_type): 
+	obstacle = obstacle_type
 	if req_met:
 		if obstacle_type == "hurdle":
 			jump_over()
-		else:
+		elif obstacle_type == "door":
 			break_barricade()
 	else:
 		die()
 		
-	
 	req_met = false
 	
+func _on_HitboxArea_body_exited(_body, obstacle_type):
+	if obstacle_type == "hurdle":
+		$AnimationPlayer.stop()
+		$AnimationPlayer.play("Jumping_stop")
+		yield($AnimationPlayer, "animation_finished")
+		_ready()
 	
 func _physics_process(_delta):
 	
@@ -109,15 +116,17 @@ func _ready():
 #play jump anime
 func jump_over():
 	$AnimationPlayer.stop()
-	$AnimationPlayer.play("Jumping")
+	$AnimationPlayer.play("Jumping_start")
 	yield($AnimationPlayer, "animation_finished")
-	_ready()
+	$AnimationPlayer.play("Slide")
+
 	
 #play breaking bad anime
 func break_barricade():
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("Breaking")
 	yield($AnimationPlayer, "animation_finished")
+	emit_signal("play_break")
 	_ready()
 
 	
@@ -128,10 +137,26 @@ func crouch():
 	$AnimationPlayer.play("Crouching")
 	
 func stop_crouch():
-	is_crouching = false
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("Crouching_Stop")
+	yield($AnimationPlayer, "animation_finished")
 	_ready()
+	is_crouching = false
 #play deading anime
 func die():
-	emit_signal("Character_Died")
+	get_node("../").gamespeed = 0
+	
+	if obstacle == "hole":
+		$AnimationPlayer.play("Hole_Death")
+		yield($AnimationPlayer, "animation_finished")
+		emit_signal("Character_Died")
+	elif obstacle == "hurdle":
+		$AnimationPlayer.play("Hurdle_Death")
+		yield($AnimationPlayer, "animation_finished")
+		emit_signal("Character_Died")
+	elif obstacle == "door":
+		$AnimationPlayer.play("Door_Death")
+		yield($AnimationPlayer, "animation_finished")
+		emit_signal("Character_Died")
+	
+	

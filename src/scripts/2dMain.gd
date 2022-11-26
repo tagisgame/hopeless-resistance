@@ -11,8 +11,6 @@ signal scoreChanged(value)
 
 var gamespeed
 
-
-
 onready var track_scene = get_node("Track")
 onready var bg_scene = get_node("Background")
 onready var obs_frequency = track_scene.obstacles_frequency
