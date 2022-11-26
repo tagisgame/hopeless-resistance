@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://src/scripts/2dMain.gd" type="Script" id=1]
 [ext_resource path="res://src/scenes/Track.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@ height = 158.0
 
 [sub_resource type="Animation" id=7]
 resource_name = "Breaking"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Character:frame")
 tracks/0/interp = 1
@@ -23,7 +24,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 72, 73, 74, 75, 75 ]
@@ -48,7 +49,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=3]
 resource_name = "Crouching_Start"
-length = 0.4
+length = 0.35
 tracks/0/type = "value"
 tracks/0/path = NodePath("Character:frame")
 tracks/0/interp = 1
@@ -64,8 +65,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=5]
 resource_name = "Crouching_Stop"
-length = 0.7
-loop = true
+length = 0.35
 tracks/0/type = "value"
 tracks/0/path = NodePath("Character:frame")
 tracks/0/interp = 1
@@ -73,15 +73,15 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.201, 0.401, 0.601 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 40, 41, 42, 43 ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "Jumping"
-length = 2.3
+[sub_resource type="Animation" id=10]
+resource_name = "Door_Death"
+length = 0.45
 tracks/0/type = "value"
 tracks/0/path = NodePath("Character:frame")
 tracks/0/interp = 1
@@ -89,7 +89,55 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.001, 0.201, 0.401, 0.601, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 80, 81, 82, 83, 84 ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "Hole_Death"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10, 11, 12 ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "Hurdle_Death"
+length = 0.35
+tracks/0/type = "value"
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.201, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 16, 17, 18, 19 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Jumping"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.001, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 48, 49, 50, 51, 56, 57, 56, 57, 64, 65, 66, 67 ]
@@ -136,7 +184,7 @@ texture = ExtResource( 3 )
 centered = false
 hframes = 8
 vframes = 11
-frame = 27
+frame = 24
 
 [node name="Hitbox" type="CollisionShape2D" parent="Player"]
 position = Vector2( 157, 538 )
@@ -147,6 +195,9 @@ anims/Breaking = SubResource( 7 )
 anims/Crouching = SubResource( 4 )
 anims/Crouching_Start = SubResource( 3 )
 anims/Crouching_Stop = SubResource( 5 )
+anims/Door_Death = SubResource( 10 )
+anims/Hole_Death = SubResource( 8 )
+anims/Hurdle_Death = SubResource( 9 )
 anims/Jumping = SubResource( 6 )
 anims/Running = SubResource( 2 )
 

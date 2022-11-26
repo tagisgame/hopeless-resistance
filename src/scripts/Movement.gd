@@ -18,6 +18,7 @@ var is_running = true
 var req_met = false
 var mash_count = 0
 export var mash_succes = 3
+var obstacle 
 
 
 signal jumped()
@@ -56,16 +57,15 @@ func _on_TriggerArea_body_exited(_body, _trigger_type):
 			
 #player enters hitbox (kill area)
 func _on_HitboxArea_body_entered(_body, obstacle_type): 
+	obstacle = obstacle_type
 	if req_met:
 		if obstacle_type == "hurdle":
 			jump_over()
-		else:
-			break_barricade()
 	else:
 		die()
 		
-	
 	req_met = false
+	
 	
 	
 func _physics_process(_delta):
@@ -96,6 +96,7 @@ func _physics_process(_delta):
 			emit_signal("mash")
 		else:
 			emit_signal("broke")
+			break_barricade()
 			req_met = true
 
 
@@ -128,10 +129,24 @@ func crouch():
 	$AnimationPlayer.play("Crouching")
 	
 func stop_crouch():
-	is_crouching = false
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("Crouching_Stop")
+	yield($AnimationPlayer, "animation_finished")
 	_ready()
+	is_crouching = false
 #play deading anime
 func die():
-	emit_signal("Character_Died")
+	if obstacle == "hole":
+		$AnimationPlayer.play("Hole_Death")
+		yield($AnimationPlayer, "animation_finished")
+		emit_signal("Character_Died")
+	elif obstacle == "hurdle":
+		$AnimationPlayer.play("Hurdle_Death")
+		yield($AnimationPlayer, "animation_finished")
+		emit_signal("Character_Died")
+	elif obstacle == "door":
+		$AnimationPlayer.play("Door_Death")
+		yield($AnimationPlayer, "animation_finished")
+		emit_signal("Character_Died")
+	
+	
