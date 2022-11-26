@@ -15,7 +15,7 @@ dest_files=[ "res://.import/space_bar.png-b1f59cf3a16ffaf954b9c164c363709a.stex"
 [params]
 
 compress/mode=0
-compress/lossy_quality=0.7
+compress/lossy_quality=0.6
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0

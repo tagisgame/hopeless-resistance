@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/assets/font/Party Confetti.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://src/scripts/GameOverScreen.gd" type="Script" id=2]
 [ext_resource path="res://src/assets/ui/space_bar.png" type="Texture" id=3]
+[ext_resource path="res://src/assets/ui/bricks.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 200
@@ -33,16 +34,21 @@ animations = [ {
 script = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = 236.0
-margin_top = 178.0
-margin_right = 1075.0
-margin_bottom = 339.0
+margin_left = 218.0
+margin_top = 154.0
+margin_right = 1057.0
+margin_bottom = 315.0
 theme = SubResource( 2 )
 text = "GAME OVER"
 
 [node name="SpaceIcon" type="AnimatedSprite" parent="."]
-position = Vector2( 666, 495 )
+position = Vector2( 628, 457 )
 frames = SubResource( 5 )
 animation = "press"
 speed_scale = 0.3
 playing = true
+
+[node name="Bricks" type="Sprite" parent="."]
+position = Vector2( 640, 360 )
+z_index = -2
+texture = ExtResource( 4 )

@@ -14,10 +14,10 @@
 				"obstacle_type": "hole",
 				"obstacle_hitboxes":{
 					"hitbox":{
-						"x1": 56,
-						"x2": 316,
+						"x1": 85,
+						"x2": 240,
 						"y1": 336,
-						"y2": 464
+						"y2": 400
 					}
 				}
 

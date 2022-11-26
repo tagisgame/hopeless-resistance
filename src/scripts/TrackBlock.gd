@@ -62,6 +62,8 @@ func set_block_data(b_data):
 			add_child(obstacle_sprite)
 		if block_obstacle == "door":
 			var door_sprite = get_node("AnimatedSprite")
+			door_sprite.playing = false
+			door_sprite.frame = 0
 			door_sprite.visible = true
 		
 		# setting up correct collision boxes
@@ -74,8 +76,9 @@ func set_block_data(b_data):
 		trigger_node.position = trigger_center
 
 func _on_Barricade_Break():
-	var door_sprite = get_node("AnimatedSprite")
-	door_sprite.playing = true
+	if position.x < 1280 and block_obstacle == "door":
+		var door_sprite = get_node("AnimatedSprite")
+		door_sprite.playing = true
 	
 func _on_HitboxArea_body_entered(body):
 	emit_signal("HitboxArea_body_entered", body, block_obstacle)
