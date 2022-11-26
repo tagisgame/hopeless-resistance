@@ -41,10 +41,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
+"times": PoolRealArray( 0, 0.15 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 32, 34 ]
+"update": 1,
+"values": [ 32, 33 ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -230,7 +230,7 @@ texture = ExtResource( 3 )
 centered = false
 hframes = 8
 vframes = 11
-frame = 67
+frame = 32
 
 [node name="Hitbox" type="CollisionShape2D" parent="Player"]
 position = Vector2( 200, 539 )
