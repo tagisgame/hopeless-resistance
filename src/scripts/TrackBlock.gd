@@ -79,7 +79,7 @@ func _on_Barricade_Break():
 	if position.x < 1280 and block_obstacle == "door":
 		var door_sprite = get_node("AnimatedSprite")
 		door_sprite.playing = true
-
+	
 func _on_HitboxArea_body_entered(body):
 	emit_signal("HitboxArea_body_entered", body, block_obstacle)
 
