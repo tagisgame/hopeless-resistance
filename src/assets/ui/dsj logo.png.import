@@ -2,19 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/wall_full_G_4.png-40570b269b851e461435a345f4c71d6b.stex"
+path="res://.import/dsj logo.png-9c9537e5037c1fe61e6f352f437f1c41.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/assets/track-blocks/img/wall_full_G_4.png"
-dest_files=[ "res://.import/wall_full_G_4.png-40570b269b851e461435a345f4c71d6b.stex" ]
+source_file="res://src/assets/ui/dsj logo.png"
+dest_files=[ "res://.import/dsj logo.png-9c9537e5037c1fe61e6f352f437f1c41.stex" ]
 
 [params]
 
-compress/mode=1
+compress/mode=0
 compress/lossy_quality=0.6
 compress/hdr_mode=0
 compress/bptc_ldr=0

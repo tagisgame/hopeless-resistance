@@ -32,6 +32,7 @@ var crouch_func = false
 
 #player enters trigger (here starts QTE)
 func _on_TriggerArea_body_entered(_body, trigger_type):
+	req_met = false
 	
 	is_crouching = false
 	_ready()

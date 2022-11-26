@@ -15,7 +15,7 @@ dest_files=[ "res://.import/character_movement_spritesheet.png-1e1f5ec632077411f
 [params]
 
 compress/mode=0
-compress/lossy_quality=0.7
+compress/lossy_quality=0.6
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0

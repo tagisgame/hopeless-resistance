@@ -15,7 +15,7 @@ dest_files=[ "res://.import/wall_full_G_5.png-3e7fffcfd201d39c24717b2c516fc761.s
 [params]
 
 compress/mode=1
-compress/lossy_quality=0.7
+compress/lossy_quality=0.6
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0

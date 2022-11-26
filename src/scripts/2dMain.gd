@@ -26,7 +26,7 @@ func _process(delta):
 		
 	update_speed(delta)
 	
-	if obs_frequency >= 2:
+	if obs_frequency >= 1:
 		obs_frequency -= 0.03 * delta
 	track_scene.obstacles_frequency = ceil(obs_frequency)
 	pass
