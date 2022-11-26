@@ -1,0 +1,276 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://src/scripts/2dMain.gd" type="Script" id=1]
+[ext_resource path="res://src/scenes/Track.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/assets/character/character_movement_spritesheet.png" type="Texture" id=3]
+[ext_resource path="res://src/scripts/Movement.gd" type="Script" id=4]
+[ext_resource path="res://src/scenes/Background.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/assets/snd/Music_1.mp3" type="AudioStream" id=6]
+[ext_resource path="res://src/assets/snd/Music_2.mp3" type="AudioStream" id=7]
+[ext_resource path="res://src/scenes/Control.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/scenes/UI.gd" type="Script" id=9]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 19.0
+height = 266.0
+
+[sub_resource type="Animation" id=7]
+resource_name = "Breaking"
+length = 0.18
+tracks/0/type = "value"
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 72, 73, 74, 75 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Crouching"
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 32, 33 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Crouching_Start"
+length = 0.35
+tracks/0/type = "value"
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 24, 25, 26, 27 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Crouching_Stop"
+length = 0.35
+tracks/0/type = "value"
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 40, 41, 42, 43 ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "Door_Death"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 80, 81, 82, 83, 84 ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "Hole_Death"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10, 11, 12 ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "Hurdle_Death"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.201, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 16, 17, 18, 19 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Jumping"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.001, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 48, 49, 50, 51, 56, 57, 56, 57, 64, 65, 67 ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "Jumping_start"
+length = 0.35
+tracks/0/type = "value"
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.001, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 48, 49, 50, 51 ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "Jumping_stop"
+length = 0.35
+tracks/0/type = "value"
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 64, 65, 66, 67 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Running"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "Slide"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 56, 57 ]
+}
+
+[node name="2dMain" type="Node2D"]
+script = ExtResource( 1 )
+starting_gamespeed = 100.0
+gamespeed_increment = 10.0
+gamespeed_cap = 900.0
+
+[node name="Track" parent="." instance=ExtResource( 2 )]
+z_index = -2
+obstacles_frequency = 5
+max_halfwalls_in_a_row = 1
+max_hurdles_in_a_row = 1
+max_barricades_in_a_row = 1
+track_block_width = 345
+
+[node name="Player" type="KinematicBody2D" parent="."]
+script = ExtResource( 4 )
+mash_succes = 4
+
+[node name="Character" type="Sprite" parent="Player"]
+position = Vector2( 77, 413 )
+texture = ExtResource( 3 )
+centered = false
+hframes = 8
+vframes = 11
+frame = 32
+
+[node name="Hitbox" type="CollisionShape2D" parent="Player"]
+position = Vector2( 200, 539 )
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+anims/Breaking = SubResource( 7 )
+anims/Crouching = SubResource( 4 )
+anims/Crouching_Start = SubResource( 3 )
+anims/Crouching_Stop = SubResource( 5 )
+anims/Door_Death = SubResource( 10 )
+anims/Hole_Death = SubResource( 8 )
+anims/Hurdle_Death = SubResource( 9 )
+anims/Jumping = SubResource( 6 )
+anims/Jumping_start = SubResource( 11 )
+anims/Jumping_stop = SubResource( 13 )
+anims/Running = SubResource( 2 )
+anims/Slide = SubResource( 12 )
+
+[node name="Control" parent="." instance=ExtResource( 8 )]
+script = ExtResource( 9 )
+
+[node name="Background" parent="." instance=ExtResource( 5 )]
+z_index = -4
+bg_block_width = 1438.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -10.0
+autoplay = true
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -10.0
+
+[connection signal="scoreChanged" from="." to="Control" method="_on_2dMain_scoreChanged"]
+[connection signal="ready" from="Track" to="." method="_on_Track_ready"]
+[connection signal="Character_Died" from="Player" to="." method="_on_Player_Character_Died"]
+[connection signal="broke" from="Player" to="Control" method="_on_Player_broke"]
+[connection signal="jumped" from="Player" to="Control" method="_on_Player_jumped"]
+[connection signal="mash" from="Player" to="Control" method="_on_Player_mash"]
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]
+[connection signal="finished" from="AudioStreamPlayer2" to="." method="_on_AudioStreamPlayer_finished"]

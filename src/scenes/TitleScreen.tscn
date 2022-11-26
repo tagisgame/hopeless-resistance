@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://src/assets/ui/bricks.png" type="Texture" id=1]
+[ext_resource path="res://src/scripts/TitleScreen.gd" type="Script" id=2]
+[ext_resource path="res://src/assets/ui/space_bar.png" type="Texture" id=3]
+[ext_resource path="res://src/assets/ui/dsj logo.png" type="Texture" id=4]
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 186, 0, 186, 35 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 186, 35 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "press",
+"speed": 5.0
+} ]
+
+[node name="TitleScreen" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="SpaceIcon" type="AnimatedSprite" parent="."]
+position = Vector2( 837, 554 )
+scale = Vector2( 2.64286, 2.64286 )
+frames = SubResource( 5 )
+animation = "press"
+speed_scale = 0.3
+playing = true
+
+[node name="DsjLogo" type="Sprite" parent="."]
+position = Vector2( 400, 292 )
+scale = Vector2( 0.683792, 0.683792 )
+texture = ExtResource( 4 )
+
+[node name="Bricks" type="Sprite" parent="."]
+position = Vector2( 640, 361 )
+z_index = -2
+texture = ExtResource( 1 )
